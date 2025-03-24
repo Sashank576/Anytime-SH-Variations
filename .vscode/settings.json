@@ -1,0 +1,9 @@
+{
+    "java.project.referencedLibraries": [
+        "Ludii\\AnytimeSequentialHalving\\lib\\Ludii-1.3.13.jar"
+    ],
+    "java.project.sourcePaths": [
+        "Ludii\\AnytimeSequentialHalving\\src"
+    ],
+    "java.project.outputPath": "bin"
+}
