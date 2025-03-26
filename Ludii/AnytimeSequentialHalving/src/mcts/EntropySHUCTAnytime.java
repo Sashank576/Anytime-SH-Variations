@@ -394,6 +394,46 @@ public class EntropySHUCTAnytime extends AI
 	}
 
 	/**
+	 * This method takes the win percentage of a node and calculates the Shannon Entropy of that node
+	 * @param winPercentage
+	 */
+	private static double calculateShannonEntropy(double winPercentage){
+		//Calculate loss percentage
+		double lossPercentage = 1 - winPercentage;
+
+		//Check if winPercentage is 0 or 1 to avoid log(0) and log(1) error, since dividing by 0 is undefined
+		if(winPercentage == 0 || winPercentage == 1){
+			//If that is the case, entropy is 0 due to no uncertainty
+			return 0.0;
+		}
+
+		//Compute Shannon Entropy
+		double shannonEntropy = -1 * ((winPercentage * Math.log(winPercentage) + lossPercentage * Math.log(lossPercentage)) / Math.log(2));
+		return shannonEntropy;
+	}
+
+	/**
+	 * This method combines the shannon entropy and win rate of a node to return a rating for that node
+	 * @param scoreSums
+	 */
+	public static double getRating(double winPercentage){
+		//Weight parameter to decide how much entropy affects rating
+		double weighting = 0.3125;
+		//Get Shannon Entropy value
+		double shannonEntropy = calculateShannonEntropy(winPercentage);
+
+		//Combine win percentage and shannon entropy to formulate a rating
+		double rating = winPercentage + (shannonEntropy * weighting);
+		//double rating = Math.max(winPercentage, shannonEntropy);
+
+		//Ensure that rating does not exceed 1.0 or go under 0.0
+		rating = Math.min(rating, 1.0);
+		rating = Math.max(rating, 0.0);
+		return rating;
+	}
+
+
+	/**
 	 	*This function neatly prints the hist variable used in the algorithm. Displays value counts for each node index visited.
 		 * @param hist
 		 * @param algo
