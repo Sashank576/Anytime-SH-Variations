@@ -222,6 +222,19 @@ public class EntropySHUCTAnytime extends AI
 					for (int p = 1; p <= game.players().count(); ++p)
 					{
 						current.scoreSums[p] += utilities[p];
+
+						if(utilities[p] == 1.0){
+							//win
+							current.outcomeCounts[p][0] += 1;
+						}
+						else if(utilities[p] == -1.0){
+							//loss
+							current.outcomeCounts[p][1] += 1;
+						}
+						else if(utilities[p] == 0.0){
+							//draw
+							current.outcomeCounts[p][2] += 1;
+						}
 					}
 					current = current.parent;
 				}
@@ -290,6 +303,19 @@ public class EntropySHUCTAnytime extends AI
 					for (int p = 1; p <= game.players().count(); ++p)
 					{
 						current.scoreSums[p] += utilities[p];
+
+						if(utilities[p] == 1.0){
+							//win
+							current.outcomeCounts[p][0] += 1;
+						}
+						else if(utilities[p] == -1.0){
+							//loss
+							current.outcomeCounts[p][1] += 1;
+						}
+						else if(utilities[p] == 0.0){
+							//draw
+							current.outcomeCounts[p][2] += 1;
+						}
 					}
 					current = current.parent;
 				}
@@ -363,12 +389,11 @@ public class EntropySHUCTAnytime extends AI
 			for (int i = 0; i < numChildren; ++i) 
 			{
 				final Node child = rootNode.children.get(currentChildrenIndexes.get(i));
-				final double exploit = child.scoreSums[mover] / child.visitCount;
-
+				final double rating = getRating(child.outcomeCounts[mover], child.visitCount);
 				ArrayList<Double> val = new ArrayList<>();
 
 				val.add((double) currentChildrenIndexes.get(i));
-				val.add(exploit);
+				val.add(rating);
 				nodeValues.add(val);
 			}
 
@@ -394,41 +419,56 @@ public class EntropySHUCTAnytime extends AI
 	}
 
 	/**
-	 * This method takes the win percentage of a node and calculates the Shannon Entropy of that node
-	 * @param winPercentage
+	 * This method takes the outcome percentages of a node and calculates the Shannon Entropy of that node
+	 * @param outcomeCounts
 	 */
-	private static double calculateShannonEntropy(double winPercentage){
-		//Calculate loss percentage
-		double lossPercentage = 1 - winPercentage;
+	private static double calculateShannonEntropy(int[] outcomeCounts, int visitCount){
+		//Calculate win/loss/draw Percentage, force one side to be double to for accurate division
+		double winPercentage = (double) outcomeCounts[0]/visitCount;
+		double lossPercentage = (double) outcomeCounts[1]/visitCount;
+		double drawPercentage = (double) outcomeCounts[2]/visitCount;
+		
+		double shannonEntropy = 0.0;
 
-		//Check if winPercentage is 0 or 1 to avoid log(0) and log(1) error, since dividing by 0 is undefined
-		if(winPercentage == 0 || winPercentage == 1){
-			//If that is the case, entropy is 0 due to no uncertainty
-			return 0.0;
+		//Check if Percentage is 0 to avoid log(0) error, if its not, then we calculate the part of the shannon entropy
+		if(winPercentage > 0.0){
+			shannonEntropy += winPercentage * Math.log(winPercentage);
+		}
+		if(lossPercentage > 0.0){
+			shannonEntropy += lossPercentage * Math.log(lossPercentage);
+		}
+		if(drawPercentage > 0.0){
+			shannonEntropy += drawPercentage * Math.log(drawPercentage);
 		}
 
-		//Compute Shannon Entropy
-		double shannonEntropy = -1 * ((winPercentage * Math.log(winPercentage) + lossPercentage * Math.log(lossPercentage)) / Math.log(2));
+		//Compute final part of shannon entropy
+		shannonEntropy = -1 * (shannonEntropy / Math.log(2));
 		return shannonEntropy;
 	}
 
 	/**
 	 * This method combines the shannon entropy and win rate of a node to return a rating for that node
-	 * @param scoreSums
+	 * @param outcomeCounts
 	 */
-	public static double getRating(double winPercentage){
+	public static double getRating(int[] outcomeCounts, int visitCount){
 		//Weight parameter to decide how much entropy affects rating
-		double weighting = 0.3125;
-		//Get Shannon Entropy value
-		double shannonEntropy = calculateShannonEntropy(winPercentage);
+		double weighting = 0.3875;
 
+		//If node has not been visited, return rating as 0.0
+		if(visitCount == 0){
+			return 0.0;
+		}
+
+		//Get Shannon Entropy value
+		double shannonEntropy = calculateShannonEntropy(outcomeCounts, visitCount);
+
+		//Get win percentage
+		double winPercentage = (double) outcomeCounts[0]/visitCount;
+		
 		//Combine win percentage and shannon entropy to formulate a rating
 		double rating = winPercentage + (shannonEntropy * weighting);
 		//double rating = Math.max(winPercentage, shannonEntropy);
 
-		//Ensure that rating does not exceed 1.0 or go under 0.0
-		rating = Math.min(rating, 1.0);
-		rating = Math.max(rating, 0.0);
 		return rating;
 	}
 
@@ -577,6 +617,9 @@ public class EntropySHUCTAnytime extends AI
 		if (!game.isAlternatingMoveGame())
 			return false;
 		
+		if (game.players().count() != 2)
+			return false;
+
 		return true;
 	}
 	
@@ -603,6 +646,9 @@ public class EntropySHUCTAnytime extends AI
 		
 		/** For every player, sum of utilities / scores backpropagated through this node */
 		protected final double[] scoreSums;
+
+		/** For every player, 0th index stores # of wins, 1st index stores # of losses, 2nd index stores # of ties */
+		protected final int[][] outcomeCounts;
 		
 		/** Child nodes */
 		protected List<Node> children = new ArrayList<Node>();
@@ -624,7 +670,8 @@ public class EntropySHUCTAnytime extends AI
 			this.context = context;
 			final Game game = context.game();
 			scoreSums = new double[game.players().count() + 1];
-			
+			outcomeCounts = new int[game.players().count() + 1][3];
+
 			// For simplicity, we just take ALL legal moves. 
 			// This means we do not support simultaneous-move games.
 			unexpandedMoves = new FastArrayList<Move>(game.moves(context).moves());

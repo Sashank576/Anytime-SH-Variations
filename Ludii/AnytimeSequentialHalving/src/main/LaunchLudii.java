@@ -1,6 +1,7 @@
 package main;
 
 import app.StartDesktopApp;
+import mcts.EntropySHUCTAnytime;
 import mcts.ExampleUCT;
 import mcts.SHUCT;
 import mcts.SHUCTAnyTime;
@@ -33,6 +34,9 @@ public class LaunchLudii
 			System.err.println("WARNING! Failed to register AI because one with that name already existed!");
 
 		if (!AIRegistry.registerAI("SHUCTAnyTime", () -> {return new SHUCTAnyTime(true, -1);}, (game) -> {return new SHUCTAnyTime(true, -1).supportsGame(game);}))
+			System.err.println("WARNING! Failed to register AI because one with that name already existed!");
+
+		if (!AIRegistry.registerAI("EntropySHUCTAnytime", () -> {return new EntropySHUCTAnytime(true, -1);}, (game) -> {return new EntropySHUCTAnytime(true, -1).supportsGame(game);}))
 			System.err.println("WARNING! Failed to register AI because one with that name already existed!");
 
 		// Run Ludii
