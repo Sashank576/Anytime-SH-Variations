@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import app.display.dialogs.visual_editor.model.interfaces.iGNode;
 import game.Game;
 import main.collections.FastArrayList;
 import other.AI;
@@ -22,7 +23,7 @@ import other.move.Move;
  * This class is a modified version of the example code provided by Dennis Soemers.
  * @author Dominic Sagers
  */
-public class EntropySHUCTAnytime extends AI
+public class RegressionTreeSHUCTAny extends AI
 {
 	
 	//-------------------------------------------------------------------------
@@ -40,9 +41,9 @@ public class EntropySHUCTAnytime extends AI
 	/**
 	 * Constructor
 	 */
-	public EntropySHUCTAnytime(boolean iterMode, int iterBudget)
+	public RegressionTreeSHUCTAny(boolean iterMode, int iterBudget)
 	{
-		this.friendlyName = "EntropySHUCTAnytime";
+		this.friendlyName = "RegressionTreeSHUCTAny";
 		this.iterMode = iterMode;
 		if (iterMode)
 		{
@@ -222,19 +223,6 @@ public class EntropySHUCTAnytime extends AI
 					for (int p = 1; p <= game.players().count(); ++p)
 					{
 						current.scoreSums[p] += utilities[p];
-
-						if(utilities[p] == 1.0){
-							//win
-							current.outcomeCounts[p][0] += 1;
-						}
-						else if(utilities[p] == -1.0){
-							//loss
-							current.outcomeCounts[p][1] += 1;
-						}
-						else if(utilities[p] == 0.0){
-							//draw
-							current.outcomeCounts[p][2] += 1;
-						}
 					}
 					current = current.parent;
 				}
@@ -303,19 +291,6 @@ public class EntropySHUCTAnytime extends AI
 					for (int p = 1; p <= game.players().count(); ++p)
 					{
 						current.scoreSums[p] += utilities[p];
-
-						if(utilities[p] == 1.0){
-							//win
-							current.outcomeCounts[p][0] += 1;
-						}
-						else if(utilities[p] == -1.0){
-							//loss
-							current.outcomeCounts[p][1] += 1;
-						}
-						else if(utilities[p] == 0.0){
-							//draw
-							current.outcomeCounts[p][2] += 1;
-						}
 					}
 					current = current.parent;
 				}
@@ -346,7 +321,7 @@ public class EntropySHUCTAnytime extends AI
 				else
 				{ //We haven't finished halving, so we halve based on the current exploit values
 					//System.out.println("before: " + currentChildrenIdx.toString());
-					currentChildrenIdx = halveRoot(root, currentChildrenIdx);
+					currentChildrenIdx = selectBestSplit(root, currentChildrenIdx);
 					//hist.add(999);
 					//System.out.println("After: " + currentChildrenIdx.toString());
 					
@@ -369,10 +344,10 @@ public class EntropySHUCTAnytime extends AI
 		return finalMoveSelection(root);
 	}
 
-	/**This method takes the rootNode, sorts it's children by their rating value, and then removes half of the worst children from the root.
+	/**This method takes the rootNode, sorts it's children by their exploit value, finds the best split that minimizes the SSE and returns the upper/better cluster of nodes from that split.
 	 * @param rootNode
 	 */
-	public static ArrayList<Integer> halveRoot(final Node rootNode, final ArrayList<Integer> currentChildrenIndexes){
+	public static ArrayList<Integer> selectBestSplit(final Node rootNode, final ArrayList<Integer> currentChildrenIndexes){
 		ArrayList<Integer> newIndexes = new ArrayList<>();
 
 		int numChildren = currentChildrenIndexes.size();
@@ -389,11 +364,12 @@ public class EntropySHUCTAnytime extends AI
 			for (int i = 0; i < numChildren; ++i) 
 			{
 				final Node child = rootNode.children.get(currentChildrenIndexes.get(i));
-				final double rating = getRating(child.outcomeCounts[mover], child.visitCount);
+				final double exploit = child.scoreSums[mover] / child.visitCount;
+
 				ArrayList<Double> val = new ArrayList<>();
 
 				val.add((double) currentChildrenIndexes.get(i));
-				val.add(rating);
+				val.add(exploit);
 				nodeValues.add(val);
 			}
 
@@ -402,16 +378,32 @@ public class EntropySHUCTAnytime extends AI
 
 			// System.out.println("nodeValues after sorting descending: " + nodeValues.toString());
 
-			// make a new list which only contains the nodes we want to keep in the tree:
+			//Create variables to store the best split with the lowest Sum of Squared Errors and the index of that split
+			double bestSSE = Double.POSITIVE_INFINITY;
+			int bestIndex = -1;
 
-			// This is the number of nodes we're keeping, so we round this up.
-			final int halfSize = (int) Math.ceil(nodeValues.size() / 2.0);
+			//Loop through the all nodes and test out every split point to find the one that minimizes the SSE
+			for(int i = 1; i < nodeValues.size(); i++){
+				//Split nodeValue into two clusters based on i
+				ArrayList<ArrayList<Double>> upperCluster = new ArrayList<>(nodeValues.subList(0, i));
+				ArrayList<ArrayList<Double>> lowerCluster = new ArrayList<>(nodeValues.subList(i, nodeValues.size()));
+				//Calculate total SSE for both clusters
+				double totalSSE = computeSumOfSquaredErrors(upperCluster) + computeSumOfSquaredErrors(lowerCluster);
 
-			ArrayList<ArrayList<Double>> upperHalf = new ArrayList<>(nodeValues.subList(0, halfSize));
+				//Store best split/index
+				if(totalSSE < bestSSE){
+					bestSSE = totalSSE;
+					bestIndex = i;
+				}
+			}
 
-			for (int i = 0; i < upperHalf.size(); i++)
+			//Only store the upper cluster since that represents the nodes with the highest exploit values
+			//new list which only contains the nodes we want to keep in the tree:
+			ArrayList<ArrayList<Double>> bestSplit = new ArrayList<>(nodeValues.subList(0, bestIndex));
+
+			for (int i = 0; i < bestSplit.size(); i++)
 			{
-				newIndexes.add(Double.valueOf(upperHalf.get(i).get(0)).intValue());
+				newIndexes.add(Double.valueOf(bestSplit.get(i).get(0)).intValue());
 			}
 			
 		}
@@ -419,66 +411,32 @@ public class EntropySHUCTAnytime extends AI
 	}
 
 	/**
-	 * This method takes the outcome percentages of a node and calculates the Shannon Entropy of that node
-	 * @param outcomeCounts
+	 * This method calculates the sum of squared errors for a cluster of nodes which contain exploit values.
+	 * @param cluster
 	 */
-	private static double calculateShannonEntropy(int[] outcomeCounts, int visitCount){
-		//Calculate win/loss/draw Percentage, force one side to be double to for accurate division
-		double winPercentage = (double) outcomeCounts[0]/visitCount;
-		double lossPercentage = (double) outcomeCounts[1]/visitCount;
-		double drawPercentage = (double) outcomeCounts[2]/visitCount;
-		
-		double shannonEntropy = 0.0;
-
-		//Check if Percentage is 0 to avoid log(0) error, if its not, then we calculate the part of the shannon entropy
-		if(winPercentage > 0.0){
-			shannonEntropy += winPercentage * Math.log(winPercentage);
+    public static double computeSumOfSquaredErrors(ArrayList<ArrayList<Double>> cluster) {
+		double mean = 0.0;
+		//Calculate the mean of the exploit values from all nodes in the cluster
+		for (int i = 0; i < cluster.size(); i++){
+			mean += cluster.get(i).get(1);
 		}
-		if(lossPercentage > 0.0){
-			shannonEntropy += lossPercentage * Math.log(lossPercentage);
+		mean = mean/cluster.size();
+
+		//Calculate the sum of squared errors for the cluster
+		double sumOfSquaredErrors = 0.0;
+		for (int i = 0; i < cluster.size(); i++){
+			double deviation = cluster.get(i).get(1) - mean;
+			sumOfSquaredErrors += Math.pow(deviation, 2);
 		}
-		if(drawPercentage > 0.0){
-			shannonEntropy += drawPercentage * Math.log(drawPercentage);
-		}
-
-		//Compute final part of shannon entropy
-		shannonEntropy = -1 * (shannonEntropy / Math.log(2));
-		return shannonEntropy;
-	}
-
-	/**
-	 * This method combines the shannon entropy and win rate of a node to return a rating for that node
-	 * @param outcomeCounts
-	 */
-	public static double getRating(int[] outcomeCounts, int visitCount){
-		//Weight parameter to decide how much entropy affects rating
-		double weighting = 0.3875;
-
-		//If node has not been visited, return rating as 0.0
-		if(visitCount == 0){
-			return 0.0;
-		}
-
-		//Get Shannon Entropy value
-		double shannonEntropy = calculateShannonEntropy(outcomeCounts, visitCount);
-
-		//Get win percentage
-		double winPercentage = (double) outcomeCounts[0]/visitCount;
-		
-		//Combine win percentage and shannon entropy to formulate a rating
-		double rating = winPercentage + (shannonEntropy * weighting);
-		//double rating = Math.max(winPercentage, shannonEntropy);
-
-		return rating;
-	}
-
+        return sumOfSquaredErrors;
+    }
 
 	/**
 	 	*This function neatly prints the hist variable used in the algorithm. Displays value counts for each node index visited.
 		 * @param hist
 		 * @param algo
 		 */
-	public static void displayHist(ArrayList<Integer> hist, EntropySHUCTAnytime algo){
+	public static void displayHist(ArrayList<Integer> hist, RegressionTreeSHUCTAny algo){
 		 
 		// Count occurrences of each integer
 		HashMap<Integer, Integer> counts = new HashMap<>();
@@ -617,9 +575,6 @@ public class EntropySHUCTAnytime extends AI
 		if (!game.isAlternatingMoveGame())
 			return false;
 		
-		if (game.players().count() != 2)
-			return false;
-
 		return true;
 	}
 	
@@ -646,9 +601,6 @@ public class EntropySHUCTAnytime extends AI
 		
 		/** For every player, sum of utilities / scores backpropagated through this node */
 		protected final double[] scoreSums;
-
-		/** For every player, 0th index stores # of wins, 1st index stores # of losses, 2nd index stores # of ties */
-		protected final int[][] outcomeCounts;
 		
 		/** Child nodes */
 		protected List<Node> children = new ArrayList<Node>();
@@ -670,8 +622,7 @@ public class EntropySHUCTAnytime extends AI
 			this.context = context;
 			final Game game = context.game();
 			scoreSums = new double[game.players().count() + 1];
-			outcomeCounts = new int[game.players().count() + 1][3];
-
+			
 			// For simplicity, we just take ALL legal moves. 
 			// This means we do not support simultaneous-move games.
 			unexpandedMoves = new FastArrayList<Move>(game.moves(context).moves());
