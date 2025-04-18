@@ -31,6 +31,10 @@ public class EntropySHUCTAnytime extends AI
 	protected int player = -1;
 	public boolean iterMode;
 	public int totalIterations;
+
+	//Stores value of weight used in the entropy calculation
+	//Weight parameter to decide how much entropy affects rating
+	public double entropyWeight;
 	
 	/** We use this because our command line arguments only include an option for seconds */
 	public int iterBudget = -1;
@@ -40,10 +44,11 @@ public class EntropySHUCTAnytime extends AI
 	/**
 	 * Constructor
 	 */
-	public EntropySHUCTAnytime(boolean iterMode, int iterBudget)
+	public EntropySHUCTAnytime(boolean iterMode, int iterBudget, double entropyWeight)
 	{
 		this.friendlyName = "EntropySHUCTAnytime";
 		this.iterMode = iterMode;
+		this.entropyWeight = entropyWeight;
 		if (iterMode)
 		{
 			this.iterBudget = iterBudget;
@@ -346,7 +351,7 @@ public class EntropySHUCTAnytime extends AI
 				else
 				{ //We haven't finished halving, so we halve based on the current exploit values
 					//System.out.println("before: " + currentChildrenIdx.toString());
-					currentChildrenIdx = halveRoot(root, currentChildrenIdx);
+					currentChildrenIdx = halveRoot(root, currentChildrenIdx, entropyWeight);
 					//hist.add(999);
 					//System.out.println("After: " + currentChildrenIdx.toString());
 					
@@ -372,7 +377,7 @@ public class EntropySHUCTAnytime extends AI
 	/**This method takes the rootNode, sorts it's children by their rating value, and then removes half of the worst children from the root.
 	 * @param rootNode
 	 */
-	public static ArrayList<Integer> halveRoot(final Node rootNode, final ArrayList<Integer> currentChildrenIndexes){
+	public static ArrayList<Integer> halveRoot(final Node rootNode, final ArrayList<Integer> currentChildrenIndexes, double entropyWeight){
 		ArrayList<Integer> newIndexes = new ArrayList<>();
 
 		int numChildren = currentChildrenIndexes.size();
@@ -389,7 +394,7 @@ public class EntropySHUCTAnytime extends AI
 			for (int i = 0; i < numChildren; ++i) 
 			{
 				final Node child = rootNode.children.get(currentChildrenIndexes.get(i));
-				final double rating = getRating(child.outcomeCounts[mover], child.visitCount);
+				final double rating = getRating(child.outcomeCounts[mover], child.visitCount, entropyWeight);
 				ArrayList<Double> val = new ArrayList<>();
 
 				val.add((double) currentChildrenIndexes.get(i));
@@ -450,9 +455,7 @@ public class EntropySHUCTAnytime extends AI
 	 * This method combines the shannon entropy and win rate of a node to return a rating for that node
 	 * @param outcomeCounts
 	 */
-	public static double getRating(int[] outcomeCounts, int visitCount){
-		//Weight parameter to decide how much entropy affects rating
-		double weighting = 0.3875;
+	public static double getRating(int[] outcomeCounts, int visitCount, double entropyWeight){
 
 		//If node has not been visited, return rating as 0.0
 		if(visitCount == 0){
@@ -466,7 +469,7 @@ public class EntropySHUCTAnytime extends AI
 		double winPercentage = (double) outcomeCounts[0]/visitCount;
 		
 		//Combine win percentage and shannon entropy to formulate a rating
-		double rating = winPercentage + (shannonEntropy * weighting);
+		double rating = winPercentage + (shannonEntropy * entropyWeight);
 		//double rating = Math.max(winPercentage, shannonEntropy);
 
 		return rating;

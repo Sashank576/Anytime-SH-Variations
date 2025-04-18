@@ -11,6 +11,7 @@ import mcts.ExampleUCT;
 import mcts.SHUCT;
 import mcts.SHUCTAnyTime;
 import mcts.SHUCTTime;
+import mcts.EntropySHUCTAnytime;
 import other.AI;
 import supplementary.experiments.EvalGamesSet;
 import utils.AIFactory;
@@ -66,6 +67,9 @@ public class AgentExperimentRunner {
 	protected boolean anytimeMode;
 	protected int anytimeBudget;
 	protected int shBudget;
+
+	/** Value indicating how much entropy affects rating of node */
+	protected double entropyWeight;
 	
 	/** Strings describing agents to use */
 	protected List<String> agentStrings;
@@ -254,6 +258,12 @@ public class AgentExperimentRunner {
 				.withDefault(Integer.valueOf(-1))
 				.withNumVals(1)
 				.withType(OptionTypes.Int));
+		argParse.addOption(new ArgOption()
+				.withNames("--entropy-weight")
+				.help("Weight value which is used in the EntropySHUCTAnytime agent")
+				.withDefault(Double.valueOf(0.3875))
+				.withNumVals(1)
+				.withType(OptionTypes.Double));
 		
 		// parse the args
 		if (!argParse.parseArguments(args))
@@ -289,6 +299,7 @@ public class AgentExperimentRunner {
         eval.outputRawResults = argParse.getValueBool("--output-raw-results");
         eval.printOut = !argParse.getValueBool("--no-print-out");
         eval.suppressDivisorWarning = argParse.getValueBool("--suppress-divisor-warning");
+		eval.entropyWeight = argParse.getValueDouble("--entropy-weight");
     }
 
     public void startExperiment()
@@ -308,7 +319,11 @@ public class AgentExperimentRunner {
             } else if (agent.equalsIgnoreCase("uct")) {
                 ExampleUCT exampleUCT = new ExampleUCT();
                 ais.add(exampleUCT);
-            } else {
+            } else if(agent.equalsIgnoreCase("entropyshuctanytime")){
+				EntropySHUCTAnytime entropyshanytime = new EntropySHUCTAnytime(this.anytimeMode, this.anytimeBudget, this.entropyWeight);
+                ais.add(entropyshanytime);
+			}
+			else {
                 ais.add(AIFactory.createAI(agent));
             }
 
