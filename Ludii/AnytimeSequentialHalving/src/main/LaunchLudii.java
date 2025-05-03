@@ -4,6 +4,7 @@ import app.StartDesktopApp;
 import mcts.EntropySHUCTAnytime;
 import mcts.ExampleUCT;
 import mcts.RegressionTreeSHUCTAny;
+import mcts.DoubleIterRegressionTreeSHUCTAny;
 import mcts.SHUCT;
 import mcts.SHUCTAnyTime;
 import mcts.SHUCTTime;
@@ -41,6 +42,9 @@ public class LaunchLudii
 			System.err.println("WARNING! Failed to register AI because one with that name already existed!");
 
 		if (!AIRegistry.registerAI("RegressionTreeSHUCTAny", () -> {return new RegressionTreeSHUCTAny(true, -1);}, (game) -> {return new RegressionTreeSHUCTAny(true, -1).supportsGame(game);}))
+			System.err.println("WARNING! Failed to register AI because one with that name already existed!");
+
+		if (!AIRegistry.registerAI("DoubleIterRegressionTreeSHUCTAny", () -> {return new DoubleIterRegressionTreeSHUCTAny(true, -1);}, (game) -> {return new DoubleIterRegressionTreeSHUCTAny(true, -1).supportsGame(game);}))
 			System.err.println("WARNING! Failed to register AI because one with that name already existed!");
 
 		// Run Ludii

@@ -23,7 +23,7 @@ import other.move.Move;
  * This class is a modified version of the example code provided by Dennis Soemers.
  * @author Dominic Sagers
  */
-public class RegressionTreeSHUCTAnyDoubleIter extends AI
+public class DoubleIterRegressionTreeSHUCTAny extends AI
 {
 	
 	//-------------------------------------------------------------------------
@@ -41,9 +41,9 @@ public class RegressionTreeSHUCTAnyDoubleIter extends AI
 	/**
 	 * Constructor
 	 */
-	public RegressionTreeSHUCTAnyDoubleIter(boolean iterMode, int iterBudget)
+	public DoubleIterRegressionTreeSHUCTAny(boolean iterMode, int iterBudget)
 	{
-		this.friendlyName = "RegressionTreeSHUCTAny";
+		this.friendlyName = "DoubleIterRegressionTreeSHUCTAny";
 		this.iterMode = iterMode;
 		if (iterMode)
 		{
@@ -307,7 +307,7 @@ public class RegressionTreeSHUCTAnyDoubleIter extends AI
 
 			}
 
-			if (armVisitCount == iterationsPerNode * currentChildrenIdx.size())
+			if (armVisitCount >= iterationsPerNode * currentChildrenIdx.size())
 			{ //if we have visited the all children before halving and # of visits per node is equal to iterationsPerNode
 				armVisitCount = 0;
 				if (currentChildrenIdx.size() <= 2)
@@ -443,7 +443,7 @@ public class RegressionTreeSHUCTAnyDoubleIter extends AI
 		 * @param hist
 		 * @param algo
 		 */
-	public static void displayHist(ArrayList<Integer> hist, RegressionTreeSHUCTAnyDoubleIter algo){
+	public static void displayHist(ArrayList<Integer> hist, DoubleIterRegressionTreeSHUCTAny algo){
 		 
 		// Count occurrences of each integer
 		HashMap<Integer, Integer> counts = new HashMap<>();

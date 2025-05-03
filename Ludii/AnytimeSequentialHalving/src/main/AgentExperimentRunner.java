@@ -8,9 +8,11 @@ import features.feature_sets.network.JITSPatterNetFeatureSet;
 import main.CommandLineArgParse.ArgOption;
 import main.CommandLineArgParse.OptionTypes;
 import mcts.ExampleUCT;
+import mcts.RegressionTreeSHUCTAny;
 import mcts.SHUCT;
 import mcts.SHUCTAnyTime;
 import mcts.SHUCTTime;
+import mcts.DoubleIterRegressionTreeSHUCTAny;
 import mcts.EntropySHUCTAnytime;
 import other.AI;
 import supplementary.experiments.EvalGamesSet;
@@ -322,6 +324,14 @@ public class AgentExperimentRunner {
             } else if(agent.equalsIgnoreCase("entropyshuctanytime")){
 				EntropySHUCTAnytime entropyshanytime = new EntropySHUCTAnytime(this.anytimeMode, this.anytimeBudget, this.entropyWeight);
                 ais.add(entropyshanytime);
+			}
+			else if(agent.equalsIgnoreCase("regressiontreeshuctany")){
+				RegressionTreeSHUCTAny regressionTreeSHUCTAny = new RegressionTreeSHUCTAny(this.anytimeMode, this.anytimeBudget);
+                ais.add(regressionTreeSHUCTAny);
+			}
+			else if(agent.equalsIgnoreCase("doubleiterregressiontreeshuctany")){
+				DoubleIterRegressionTreeSHUCTAny doubleIterRegressionTreeSHUCTAny = new DoubleIterRegressionTreeSHUCTAny(this.anytimeMode, this.anytimeBudget);
+                ais.add(doubleIterRegressionTreeSHUCTAny);
 			}
 			else {
                 ais.add(AIFactory.createAI(agent));
