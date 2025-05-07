@@ -1,1 +1,3 @@
 /bin/
+Ludii/AnytimeSequentialHalving/src/mcts/new_experiment_scripts/run_failedWeights_UCT.sh
+Ludii/AnytimeSequentialHalving/src/mcts/new_experiment_scripts/run_failedWeights_ASH.sh

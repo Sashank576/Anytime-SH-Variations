@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import app.display.dialogs.visual_editor.model.interfaces.iGNode;
 import game.Game;
 import main.collections.FastArrayList;
 import other.AI;
@@ -20,8 +19,8 @@ import other.move.Move;
  * Only supports deterministic, alternating-move games.
  * 
  * 
- * This class is a modified version of the example code provided by Dennis Soemers.
- * @author Dominic Sagers
+ * This class is a modified version of the Anytime Sequential Halving agent provided by Dominic Sagers.
+ * @author Sashank Chapala
  */
 public class DoubleIterRegressionTreeSHUCTAny extends AI
 {

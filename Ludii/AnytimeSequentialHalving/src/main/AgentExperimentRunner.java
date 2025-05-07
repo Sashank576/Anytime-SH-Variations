@@ -21,7 +21,7 @@ import utils.AIFactory;
 
 /*
  * A modified duplicate version of the famous EvalAgents class made specifically for my purposes.
- * Author: Dominic Sagers - i6255473
+ * Author: Dominic Sagers - i6255473, modified by Sashank Chapala - i6317806
  */
 public class AgentExperimentRunner {
 

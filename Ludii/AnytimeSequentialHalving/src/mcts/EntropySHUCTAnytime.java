@@ -19,8 +19,8 @@ import other.move.Move;
  * Only supports deterministic, alternating-move games.
  * 
  * 
- * This class is a modified version of the example code provided by Dennis Soemers.
- * @author Dominic Sagers
+ * This class is a modified version of the Anytime Sequential Halving agent provided by Dominic Sagers.
+ * @author Sashank Chapala
  */
 public class EntropySHUCTAnytime extends AI
 {
