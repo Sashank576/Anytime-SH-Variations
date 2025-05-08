@@ -1,0 +1,287 @@
+Warming up...
+Finished warming up!
+=====================================================
+Completed 1 games.
+
+Agent 1 (EntropySHUCTAnytime)
+Winning score (between 0 and 1) : N=1, mean=1 (+/-0).
+P1: N=1, mean=1 (+/-0).
+P2: N=0, mean=0 (+/-0).
+Game Durations: N=1, mean=71 (+/-0).
+P1: N=1, mean=71 (+/-0).
+P2: N=0, mean=0 (+/-0).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=1, mean=0 (+/-0).
+P1: N=0, mean=0 (+/-0).
+P2: N=1, mean=0 (+/-0).
+Game Durations: N=1, mean=71 (+/-0).
+P1: N=0, mean=0 (+/-0).
+P2: N=1, mean=71 (+/-0).
+=====================================================
+=====================================================
+Completed 2 games.
+
+Agent 1 (EntropySHUCTAnytime)
+Winning score (between 0 and 1) : N=2, mean=0.5 (+/-0.97998).
+P1: N=1, mean=1 (+/-0).
+P2: N=1, mean=0 (+/-0).
+Game Durations: N=2, mean=52 (+/-37.23924).
+P1: N=1, mean=71 (+/-0).
+P2: N=1, mean=33 (+/-0).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=2, mean=0.5 (+/-0.97998).
+P1: N=1, mean=1 (+/-0).
+P2: N=1, mean=0 (+/-0).
+Game Durations: N=2, mean=52 (+/-37.23924).
+P1: N=1, mean=33 (+/-0).
+P2: N=1, mean=71 (+/-0).
+=====================================================
+=====================================================
+Completed 3 games.
+
+Agent 1 (EntropySHUCTAnytime)
+Winning score (between 0 and 1) : N=3, mean=0.666667 (+/-0.65332).
+P1: N=2, mean=1 (+/-0).
+P2: N=1, mean=0 (+/-0).
+Game Durations: N=3, mean=54.333333 (+/-21.981087).
+P1: N=2, mean=65 (+/-11.75976).
+P2: N=1, mean=33 (+/-0).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=3, mean=0.333333 (+/-0.65332).
+P1: N=1, mean=1 (+/-0).
+P2: N=2, mean=0 (+/-0).
+Game Durations: N=3, mean=54.333333 (+/-21.981087).
+P1: N=1, mean=33 (+/-0).
+P2: N=2, mean=65 (+/-11.75976).
+=====================================================
+=====================================================
+Completed 4 games.
+
+Agent 1 (EntropySHUCTAnytime)
+Winning score (between 0 and 1) : N=4, mean=0.75 (+/-0.48999).
+P1: N=2, mean=1 (+/-0).
+P2: N=2, mean=0.5 (+/-0.97998).
+Game Durations: N=4, mean=60.75 (+/-19.993754).
+P1: N=2, mean=65 (+/-11.75976).
+P2: N=2, mean=56.5 (+/-46.05906).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=4, mean=0.25 (+/-0.48999).
+P1: N=2, mean=0.5 (+/-0.97998).
+P2: N=2, mean=0 (+/-0).
+Game Durations: N=4, mean=60.75 (+/-19.993754).
+P1: N=2, mean=56.5 (+/-46.05906).
+P2: N=2, mean=65 (+/-11.75976).
+=====================================================
+=====================================================
+Completed 5 games.
+
+Agent 1 (EntropySHUCTAnytime)
+Winning score (between 0 and 1) : N=5, mean=0.8 (+/-0.391992).
+P1: N=3, mean=1 (+/-0).
+P2: N=2, mean=0.5 (+/-0.97998).
+Game Durations: N=5, mean=60.8 (+/-15.487405).
+P1: N=3, mean=63.666667 (+/-7.275064).
+P2: N=2, mean=56.5 (+/-46.05906).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=5, mean=0.2 (+/-0.391992).
+P1: N=2, mean=0.5 (+/-0.97998).
+P2: N=3, mean=0 (+/-0).
+Game Durations: N=5, mean=60.8 (+/-15.487405).
+P1: N=2, mean=56.5 (+/-46.05906).
+P2: N=3, mean=63.666667 (+/-7.275064).
+=====================================================
+=====================================================
+Completed 10 games.
+
+Agent 1 (EntropySHUCTAnytime)
+Winning score (between 0 and 1) : N=10, mean=0.8 (+/-0.261328).
+P1: N=5, mean=1 (+/-0).
+P2: N=5, mean=0.6 (+/-0.48009).
+Game Durations: N=10, mean=60.9 (+/-10.393539).
+P1: N=5, mean=65.8 (+/-8.817642).
+P2: N=5, mean=56 (+/-19.032816).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=10, mean=0.2 (+/-0.261328).
+P1: N=5, mean=0.4 (+/-0.48009).
+P2: N=5, mean=0 (+/-0).
+Game Durations: N=10, mean=60.9 (+/-10.393539).
+P1: N=5, mean=56 (+/-19.032816).
+P2: N=5, mean=65.8 (+/-8.817642).
+=====================================================
+=====================================================
+Completed 20 games.
+
+Agent 1 (EntropySHUCTAnytime)
+Winning score (between 0 and 1) : N=20, mean=0.6 (+/-0.22028).
+P1: N=10, mean=0.6 (+/-0.32006).
+P2: N=10, mean=0.6 (+/-0.32006).
+Game Durations: N=20, mean=58.5 (+/-5.839338).
+P1: N=10, mean=60 (+/-6.591737).
+P2: N=10, mean=57 (+/-9.929604).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=20, mean=0.4 (+/-0.22028).
+P1: N=10, mean=0.4 (+/-0.32006).
+P2: N=10, mean=0.4 (+/-0.32006).
+Game Durations: N=20, mean=58.5 (+/-5.839338).
+P1: N=10, mean=57 (+/-9.929604).
+P2: N=10, mean=60 (+/-6.591737).
+=====================================================
+=====================================================
+Completed 30 games.
+
+Agent 1 (EntropySHUCTAnytime)
+Winning score (between 0 and 1) : N=30, mean=0.5 (+/-0.181978).
+P1: N=15, mean=0.533333 (+/-0.261328).
+P2: N=15, mean=0.466667 (+/-0.261328).
+Game Durations: N=30, mean=57.6 (+/-4.688861).
+P1: N=15, mean=60.666667 (+/-5.922245).
+P2: N=15, mean=54.533333 (+/-7.130814).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=30, mean=0.5 (+/-0.181978).
+P1: N=15, mean=0.533333 (+/-0.261328).
+P2: N=15, mean=0.466667 (+/-0.261328).
+Game Durations: N=30, mean=57.6 (+/-4.688861).
+P1: N=15, mean=54.533333 (+/-7.130814).
+P2: N=15, mean=60.666667 (+/-5.922245).
+=====================================================
+=====================================================
+Completed 40 games.
+
+Agent 1 (EntropySHUCTAnytime)
+Winning score (between 0 and 1) : N=40, mean=0.4 (+/-0.153752).
+P1: N=20, mean=0.4 (+/-0.22028).
+P2: N=20, mean=0.4 (+/-0.22028).
+Game Durations: N=40, mean=57.7 (+/-4.183799).
+P1: N=20, mean=59.9 (+/-5.655356).
+P2: N=20, mean=55.5 (+/-6.157848).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=40, mean=0.6 (+/-0.153752).
+P1: N=20, mean=0.6 (+/-0.22028).
+P2: N=20, mean=0.6 (+/-0.22028).
+Game Durations: N=40, mean=57.7 (+/-4.183799).
+P1: N=20, mean=55.5 (+/-6.157848).
+P2: N=20, mean=59.9 (+/-5.655356).
+=====================================================
+=====================================================
+Completed 50 games.
+
+Agent 1 (EntropySHUCTAnytime)
+Winning score (between 0 and 1) : N=50, mean=0.36 (+/-0.134397).
+P1: N=25, mean=0.4 (+/-0.195996).
+P2: N=25, mean=0.32 (+/-0.186626).
+Game Durations: N=50, mean=59.22 (+/-3.504424).
+P1: N=25, mean=60.32 (+/-4.596124).
+P2: N=25, mean=58.12 (+/-5.351229).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=50, mean=0.64 (+/-0.134397).
+P1: N=25, mean=0.68 (+/-0.186626).
+P2: N=25, mean=0.6 (+/-0.195996).
+Game Durations: N=50, mean=59.22 (+/-3.504424).
+P1: N=25, mean=58.12 (+/-5.351229).
+P2: N=25, mean=60.32 (+/-4.596124).
+=====================================================
+=====================================================
+Completed 60 games.
+
+Agent 1 (EntropySHUCTAnytime)
+Winning score (between 0 and 1) : N=60, mean=0.4 (+/-0.125005).
+P1: N=30, mean=0.433333 (+/-0.180353).
+P2: N=30, mean=0.366667 (+/-0.175388).
+Game Durations: N=60, mean=57.866667 (+/-3.180011).
+P1: N=30, mean=59.166667 (+/-4.096273).
+P2: N=30, mean=56.566667 (+/-4.89082).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=60, mean=0.6 (+/-0.125005).
+P1: N=30, mean=0.633333 (+/-0.175388).
+P2: N=30, mean=0.566667 (+/-0.180353).
+Game Durations: N=60, mean=57.866667 (+/-3.180011).
+P1: N=30, mean=56.566667 (+/-4.89082).
+P2: N=30, mean=59.166667 (+/-4.096273).
+=====================================================
+=====================================================
+Completed 70 games.
+
+Agent 1 (EntropySHUCTAnytime)
+Winning score (between 0 and 1) : N=70, mean=0.4 (+/-0.115592).
+P1: N=35, mean=0.428571 (+/-0.166341).
+P2: N=35, mean=0.371429 (+/-0.162414).
+Game Durations: N=70, mean=57.3 (+/-2.853619).
+P1: N=35, mean=58.657143 (+/-3.789226).
+P2: N=35, mean=55.942857 (+/-4.275179).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=70, mean=0.6 (+/-0.115592).
+P1: N=35, mean=0.628571 (+/-0.162414).
+P2: N=35, mean=0.571429 (+/-0.166341).
+Game Durations: N=70, mean=57.3 (+/-2.853619).
+P1: N=35, mean=55.942857 (+/-4.275179).
+P2: N=35, mean=58.657143 (+/-3.789226).
+=====================================================
+=====================================================
+Completed 80 games.
+
+Agent 1 (EntropySHUCTAnytime)
+Winning score (between 0 and 1) : N=80, mean=0.4125 (+/-0.108555).
+P1: N=40, mean=0.425 (+/-0.155147).
+P2: N=40, mean=0.4 (+/-0.153752).
+Game Durations: N=80, mean=57.0375 (+/-2.833276).
+P1: N=40, mean=58.975 (+/-4.084499).
+P2: N=40, mean=55.1 (+/-3.885723).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=80, mean=0.5875 (+/-0.108555).
+P1: N=40, mean=0.6 (+/-0.153752).
+P2: N=40, mean=0.575 (+/-0.155147).
+Game Durations: N=80, mean=57.0375 (+/-2.833276).
+P1: N=40, mean=55.1 (+/-3.885723).
+P2: N=40, mean=58.975 (+/-4.084499).
+=====================================================
+=====================================================
+Completed 90 games.
+
+Agent 1 (EntropySHUCTAnytime)
+Winning score (between 0 and 1) : N=90, mean=0.411111 (+/-0.102223).
+P1: N=45, mean=0.4 (+/-0.144753).
+P2: N=45, mean=0.422222 (+/-0.145939).
+Game Durations: N=90, mean=57.111111 (+/-2.636746).
+P1: N=45, mean=59.022222 (+/-3.733076).
+P2: N=45, mean=55.2 (+/-3.681324).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=90, mean=0.588889 (+/-0.102223).
+P1: N=45, mean=0.577778 (+/-0.145939).
+P2: N=45, mean=0.6 (+/-0.144753).
+Game Durations: N=90, mean=57.111111 (+/-2.636746).
+P1: N=45, mean=55.2 (+/-3.681324).
+P2: N=45, mean=59.022222 (+/-3.733076).
+=====================================================
+=====================================================
+Completed 100 games.
+
+Agent 1 (EntropySHUCTAnytime)
+Winning score (between 0 and 1) : N=100, mean=0.4 (+/-0.096502).
+P1: N=50, mean=0.38 (+/-0.135905).
+P2: N=50, mean=0.42 (+/-0.138194).
+Game Durations: N=100, mean=57.46 (+/-2.485962).
+P1: N=50, mean=59.54 (+/-3.597119).
+P2: N=50, mean=55.38 (+/-3.369666).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=100, mean=0.6 (+/-0.096502).
+P1: N=50, mean=0.58 (+/-0.138194).
+P2: N=50, mean=0.62 (+/-0.135905).
+Game Durations: N=100, mean=57.46 (+/-2.485962).
+P1: N=50, mean=55.38 (+/-3.369666).
+P2: N=50, mean=59.54 (+/-3.597119).
+=====================================================

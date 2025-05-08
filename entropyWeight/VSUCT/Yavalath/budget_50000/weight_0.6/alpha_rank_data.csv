@@ -1,0 +1,3 @@
+agents,scores
+"('Example UCT', 'EntropySHUCTAnytime')","(-0.86, 0.86)"
+"('EntropySHUCTAnytime', 'Example UCT')","(0.96, -0.96)"

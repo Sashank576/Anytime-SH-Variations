@@ -1,0 +1,3 @@
+agents,scores
+"('EntropySHUCTAnytime', 'SHUCTAnyTime')","(-0.04, 0.04)"
+"('SHUCTAnyTime', 'EntropySHUCTAnytime')","(0.08, -0.08)"
