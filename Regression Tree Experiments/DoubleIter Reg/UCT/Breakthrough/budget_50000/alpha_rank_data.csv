@@ -1,0 +1,3 @@
+agents,scores
+"('Example UCT', 'DoubleIterRegressionTreeSHUCTAny')","(0.2, -0.2)"
+"('DoubleIterRegressionTreeSHUCTAny', 'Example UCT')","(-0.28, 0.28)"

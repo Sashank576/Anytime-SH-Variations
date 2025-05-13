@@ -1,0 +1,3 @@
+agents,scores
+"('Example UCT', 'RegressionTreeSHUCTAny')","(0.5, -0.5)"
+"('RegressionTreeSHUCTAny', 'Example UCT')","(0.42, -0.42)"
