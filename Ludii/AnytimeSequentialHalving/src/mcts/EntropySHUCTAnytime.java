@@ -36,6 +36,9 @@ public class EntropySHUCTAnytime extends AI
 	//Weight parameter to decide how much entropy affects rating
 	public double entropyWeight;
 	
+	//Value of exploration constant used in UCB1
+	public double explorationConstant;
+
 	/** We use this because our command line arguments only include an option for seconds */
 	public int iterBudget = -1;
 	
@@ -44,11 +47,18 @@ public class EntropySHUCTAnytime extends AI
 	/**
 	 * Constructor
 	 */
-	public EntropySHUCTAnytime(boolean iterMode, int iterBudget, double entropyWeight)
+	public EntropySHUCTAnytime(boolean iterMode, int iterBudget, double entropyWeight, double explorationConstant)
 	{
 		this.friendlyName = "EntropySHUCTAnytime";
 		this.iterMode = iterMode;
 		this.entropyWeight = entropyWeight;
+		if(explorationConstant == -1.0){
+			//default value is sqrt(2)
+			this.explorationConstant = Math.sqrt(2);
+		}
+		else{
+			this.explorationConstant = explorationConstant;
+		}
 		if (iterMode)
 		{
 			this.iterBudget = iterBudget;
@@ -189,7 +199,7 @@ public class EntropySHUCTAnytime extends AI
 						break;
 					}
 					
-					current = ucb1Select(current);
+					current = ucb1Select(current, explorationConstant);
 					
 					if (current.visitCount == 0)
 					{
@@ -270,7 +280,7 @@ public class EntropySHUCTAnytime extends AI
 						break;
 					}
 					
-					current = ucb1Select(current);
+					current = ucb1Select(current, explorationConstant);
 					
 					if (current.visitCount == 0)
 					{
@@ -511,7 +521,7 @@ public class EntropySHUCTAnytime extends AI
 	 * @param current
 	 * @return Selected node (if it has 0 visits, it will be a newly-expanded node).
 	 */
-	public static Node ucb1Select(final Node current)
+	public static Node ucb1Select(final Node current, final double explorationConstant)
 	{
 		if (!current.unexpandedMoves.isEmpty())
 		{
@@ -532,7 +542,7 @@ public class EntropySHUCTAnytime extends AI
 		// use UCB1 equation to select from all children, with random tie-breaking
 		Node bestChild = null;
         double bestValue = Double.NEGATIVE_INFINITY;
-        final double twoParentLog = 2.0 * Math.log(Math.max(1, current.visitCount));
+        final double twoParentLog = Math.log(Math.max(1, current.visitCount));
         int numBestFound = 0;
         
         final int numChildren = current.children.size();
@@ -542,7 +552,7 @@ public class EntropySHUCTAnytime extends AI
         {
         	final Node child = current.children.get(i);
         	final double exploit = child.scoreSums[mover] / child.visitCount;
-        	final double explore = Math.sqrt(twoParentLog / child.visitCount);
+        	final double explore = explorationConstant * Math.sqrt(twoParentLog / child.visitCount);
         
             final double ucb1Value = exploit + explore;
             

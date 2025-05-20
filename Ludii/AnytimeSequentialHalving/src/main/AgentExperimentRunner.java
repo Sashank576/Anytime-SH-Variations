@@ -72,6 +72,9 @@ public class AgentExperimentRunner {
 
 	/** Value indicating how much entropy affects rating of node */
 	protected double entropyWeight;
+
+	/** Value of the exploration constant used in the UCB1 function */
+	protected double explorationConstant;
 	
 	/** Strings describing agents to use */
 	protected List<String> agentStrings;
@@ -266,6 +269,12 @@ public class AgentExperimentRunner {
 				.withDefault(Double.valueOf(0.3875))
 				.withNumVals(1)
 				.withType(OptionTypes.Double));
+		argParse.addOption(new ArgOption()
+				.withNames("--exploration-constant")
+				.help("Exploration constant value which is used in the UCB1 function")
+				.withDefault(Double.valueOf(Math.sqrt(2)))
+				.withNumVals(1)
+				.withType(OptionTypes.Double));
 		
 		// parse the args
 		if (!argParse.parseArguments(args))
@@ -302,6 +311,7 @@ public class AgentExperimentRunner {
         eval.printOut = !argParse.getValueBool("--no-print-out");
         eval.suppressDivisorWarning = argParse.getValueBool("--suppress-divisor-warning");
 		eval.entropyWeight = argParse.getValueDouble("--entropy-weight");
+		eval.explorationConstant = argParse.getValueDouble("--exploration-constant");
     }
 
     public void startExperiment()
@@ -316,21 +326,21 @@ public class AgentExperimentRunner {
                 SHUCTTime shtime = new SHUCTTime();
                 ais.add(shtime);
             } else if (agent.equalsIgnoreCase("shuctanytime")) {
-                SHUCTAnyTime shanytime = new SHUCTAnyTime(this.anytimeMode, this.anytimeBudget);
+                SHUCTAnyTime shanytime = new SHUCTAnyTime(this.anytimeMode, this.anytimeBudget, this.explorationConstant);
                 ais.add(shanytime);
             } else if (agent.equalsIgnoreCase("uct")) {
-                ExampleUCT exampleUCT = new ExampleUCT();
+                ExampleUCT exampleUCT = new ExampleUCT(this.explorationConstant);
                 ais.add(exampleUCT);
             } else if(agent.equalsIgnoreCase("entropyshuctanytime")){
-				EntropySHUCTAnytime entropyshanytime = new EntropySHUCTAnytime(this.anytimeMode, this.anytimeBudget, this.entropyWeight);
+				EntropySHUCTAnytime entropyshanytime = new EntropySHUCTAnytime(this.anytimeMode, this.anytimeBudget, this.entropyWeight, this.explorationConstant);
                 ais.add(entropyshanytime);
 			}
 			else if(agent.equalsIgnoreCase("regressiontreeshuctany")){
-				RegressionTreeSHUCTAny regressionTreeSHUCTAny = new RegressionTreeSHUCTAny(this.anytimeMode, this.anytimeBudget);
+				RegressionTreeSHUCTAny regressionTreeSHUCTAny = new RegressionTreeSHUCTAny(this.anytimeMode, this.anytimeBudget, this.explorationConstant);
                 ais.add(regressionTreeSHUCTAny);
 			}
 			else if(agent.equalsIgnoreCase("doubleiterregressiontreeshuctany")){
-				DoubleIterRegressionTreeSHUCTAny doubleIterRegressionTreeSHUCTAny = new DoubleIterRegressionTreeSHUCTAny(this.anytimeMode, this.anytimeBudget);
+				DoubleIterRegressionTreeSHUCTAny doubleIterRegressionTreeSHUCTAny = new DoubleIterRegressionTreeSHUCTAny(this.anytimeMode, this.anytimeBudget, this.explorationConstant);
                 ais.add(doubleIterRegressionTreeSHUCTAny);
 			}
 			else {

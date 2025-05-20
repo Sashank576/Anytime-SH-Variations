@@ -16,7 +16,7 @@ import other.move.Move;
  * 
  * Only supports deterministic, alternating-move games.
  * 
- * @author Dennis Soemers
+ * @author Dennis Soemers, modified by Sashank Chapala - i6317806
  */
 public class ExampleUCT extends AI
 {
@@ -25,15 +25,26 @@ public class ExampleUCT extends AI
 	
 	/** Our player index */
 	protected int player = -1;
+
+	//Value of exploration constant used in UCB1
+	public double explorationConstant;
 	
 	//-------------------------------------------------------------------------
 	
 	/**
 	 * Constructor
 	 */
-	public ExampleUCT()
+	public ExampleUCT(double explorationConstant)
 	{
 		this.friendlyName = "Example UCT";
+
+		if(explorationConstant == -1.0){
+			//default value is sqrt(2)
+			this.explorationConstant = Math.sqrt(2);
+		}
+		else{
+			this.explorationConstant = explorationConstant;
+		}
 	}
 	
 	//-------------------------------------------------------------------------
@@ -77,7 +88,7 @@ public class ExampleUCT extends AI
 					break;
 				}
 				
-				current = select(current);
+				current = select(current, explorationConstant);
 				
 				if (current.visitCount == 0)
 				{
@@ -135,7 +146,7 @@ public class ExampleUCT extends AI
 	 * @param current
 	 * @return Selected node (if it has 0 visits, it will be a newly-expanded node).
 	 */
-	public static Node select(final Node current)
+	public static Node select(final Node current, final double explorationConstant)
 	{
 		if (!current.unexpandedMoves.isEmpty())
 		{
@@ -156,7 +167,7 @@ public class ExampleUCT extends AI
 		// use UCB1 equation to select from all children, with random tie-breaking
 		Node bestChild = null;
         double bestValue = Double.NEGATIVE_INFINITY;
-        final double twoParentLog = 2.0 * Math.log(Math.max(1, current.visitCount));
+        final double twoParentLog = Math.log(Math.max(1, current.visitCount));
         int numBestFound = 0;
         
         final int numChildren = current.children.size();
@@ -166,7 +177,7 @@ public class ExampleUCT extends AI
         {
         	final Node child = current.children.get(i);
         	final double exploit = child.scoreSums[mover] / child.visitCount;
-        	final double explore = Math.sqrt(twoParentLog / child.visitCount);
+        	final double explore = explorationConstant * Math.sqrt(twoParentLog / child.visitCount);
         
             final double ucb1Value = exploit + explore;
             

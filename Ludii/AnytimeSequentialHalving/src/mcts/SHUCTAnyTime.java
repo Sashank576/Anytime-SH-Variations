@@ -20,7 +20,7 @@ import other.move.Move;
  * 
  * 
  * This class is a modified version of the example code provided by Dennis Soemers.
- * @author Dominic Sagers
+ * @author Dominic Sagers, modified by Sashank Chapala - i6317806
  */
 public class SHUCTAnyTime extends AI
 {
@@ -31,6 +31,9 @@ public class SHUCTAnyTime extends AI
 	protected int player = -1;
 	public boolean iterMode;
 	public int totalIterations;
+
+	//Value of exploration constant used in UCB1
+	public double explorationConstant;
 	
 	/** We use this because our command line arguments only include an option for seconds */
 	public int iterBudget = -1;
@@ -40,10 +43,19 @@ public class SHUCTAnyTime extends AI
 	/**
 	 * Constructor
 	 */
-	public SHUCTAnyTime(boolean iterMode, int iterBudget)
+	public SHUCTAnyTime(boolean iterMode, int iterBudget, double explorationConstant)
 	{
 		this.friendlyName = "SHUCTAnyTime";
 		this.iterMode = iterMode;
+
+		if(explorationConstant == -1.0){
+			//default value is sqrt(2)
+			this.explorationConstant = Math.sqrt(2);
+		}
+		else{
+			this.explorationConstant = explorationConstant;
+		}
+
 		if (iterMode)
 		{
 			this.iterBudget = iterBudget;
@@ -184,7 +196,7 @@ public class SHUCTAnyTime extends AI
 						break;
 					}
 					
-					current = ucb1Select(current);
+					current = ucb1Select(current, explorationConstant);
 					
 					if (current.visitCount == 0)
 					{
@@ -252,7 +264,7 @@ public class SHUCTAnyTime extends AI
 						break;
 					}
 					
-					current = ucb1Select(current);
+					current = ucb1Select(current, explorationConstant);
 					
 					if (current.visitCount == 0)
 					{
@@ -428,7 +440,7 @@ public class SHUCTAnyTime extends AI
 	 * @param current
 	 * @return Selected node (if it has 0 visits, it will be a newly-expanded node).
 	 */
-	public static Node ucb1Select(final Node current)
+	public static Node ucb1Select(final Node current, final double explorationConstant)
 	{
 		if (!current.unexpandedMoves.isEmpty())
 		{
@@ -449,7 +461,7 @@ public class SHUCTAnyTime extends AI
 		// use UCB1 equation to select from all children, with random tie-breaking
 		Node bestChild = null;
         double bestValue = Double.NEGATIVE_INFINITY;
-        final double twoParentLog = 2.0 * Math.log(Math.max(1, current.visitCount));
+        final double twoParentLog = Math.log(Math.max(1, current.visitCount));
         int numBestFound = 0;
         
         final int numChildren = current.children.size();
@@ -459,7 +471,7 @@ public class SHUCTAnyTime extends AI
         {
         	final Node child = current.children.get(i);
         	final double exploit = child.scoreSums[mover] / child.visitCount;
-        	final double explore = Math.sqrt(twoParentLog / child.visitCount);
+        	final double explore = explorationConstant * Math.sqrt(twoParentLog / child.visitCount);
         
             final double ucb1Value = exploit + explore;
             
