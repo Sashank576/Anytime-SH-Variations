@@ -1,3 +1,3 @@
 agents,scores
-"('Example UCT', 'EntropySHUCTAnytime')","(-0.88, 0.88)"
-"('EntropySHUCTAnytime', 'Example UCT')","(0.92, -0.92)"
+"('Example UCT', 'EntropySHUCTAnytime')","(0.06, -0.06)"
+"('EntropySHUCTAnytime', 'Example UCT')","(0.12, -0.12)"
