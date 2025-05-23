@@ -38,7 +38,7 @@ public class LaunchLudii
 		if (!AIRegistry.registerAI("SHUCTAnyTime", () -> {return new SHUCTAnyTime(true, -1, -1);}, (game) -> {return new SHUCTAnyTime(true, -1, -1).supportsGame(game);}))
 			System.err.println("WARNING! Failed to register AI because one with that name already existed!");
 
-		if (!AIRegistry.registerAI("EntropySHUCTAnytime", () -> {return new EntropySHUCTAnytime(true, -1, 0.3875, -1);}, (game) -> {return new EntropySHUCTAnytime(true, -1, 0.3875, -1).supportsGame(game);}))
+		if (!AIRegistry.registerAI("EntropySHUCTAnytime", () -> {return new EntropySHUCTAnytime(true, -1, 0.5, -1);}, (game) -> {return new EntropySHUCTAnytime(true, -1, 0.3875, -1).supportsGame(game);}))
 			System.err.println("WARNING! Failed to register AI because one with that name already existed!");
 
 		if (!AIRegistry.registerAI("RegressionTreeSHUCTAny", () -> {return new RegressionTreeSHUCTAny(true, -1, -1);}, (game) -> {return new RegressionTreeSHUCTAny(true, -1, -1).supportsGame(game);}))

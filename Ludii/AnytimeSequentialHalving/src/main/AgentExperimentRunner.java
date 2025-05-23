@@ -326,7 +326,7 @@ public class AgentExperimentRunner {
                 SHUCTTime shtime = new SHUCTTime();
                 ais.add(shtime);
             } else if (agent.equalsIgnoreCase("shuctanytime")) {
-                SHUCTAnyTime shanytime = new SHUCTAnyTime(this.anytimeMode, this.anytimeBudget, this.explorationConstant);
+                SHUCTAnyTime shanytime = new SHUCTAnyTime(this.anytimeMode, this.anytimeBudget, -1.0);
                 ais.add(shanytime);
             } else if (agent.equalsIgnoreCase("uct")) {
                 ExampleUCT exampleUCT = new ExampleUCT(this.explorationConstant);
