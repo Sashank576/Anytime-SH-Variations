@@ -3,8 +3,6 @@ trap '' HUP
 
 jar_file="AgentEval.jar"
 
-# ------------ AGAINST UCT (Clobber Game) ------------
-
 game="Clobber.lud"
 game_name="Clobber"
 agents="entropyshuctanytime uct"

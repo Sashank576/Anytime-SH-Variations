@@ -434,26 +434,28 @@ public class EntropySHUCTAnytime extends AI
 	}
 
 	/**
-	 * This method takes the outcome percentages of a node and calculates the Shannon Entropy of that node
+	 * This method takes the outcome rate of a node and calculates the Shannon Entropy of that node
 	 * @param outcomeCounts
 	 */
 	private static double calculateShannonEntropy(int[] outcomeCounts, int visitCount){
-		//Calculate win/loss/draw Percentage, force one side to be double to for accurate division
-		double winPercentage = (double) outcomeCounts[0]/visitCount;
-		double lossPercentage = (double) outcomeCounts[1]/visitCount;
-		double drawPercentage = (double) outcomeCounts[2]/visitCount;
+		//Calculate win/loss/draw Rate, force one side to be double to for accurate division
+		double winRate = (double) outcomeCounts[0]/visitCount;
+		double lossRate = (double) outcomeCounts[1]/visitCount;
+		double drawRate = (double) outcomeCounts[2]/visitCount;
 		
 		double shannonEntropy = 0.0;
 
 		//Check if Percentage is 0 to avoid log(0) error, if its not, then we calculate the part of the shannon entropy
-		if(winPercentage > 0.0){
-			shannonEntropy += winPercentage * Math.log(winPercentage);
+		if(winRate > 0.0){
+			shannonEntropy += winRate * Math.log(winRate);
 		}
-		if(lossPercentage > 0.0){
-			shannonEntropy += lossPercentage * Math.log(lossPercentage);
+		if(lossRate > 0.0){
+			shannonEntropy += lossRate * Math.log(lossRate);
 		}
-		if(drawPercentage > 0.0){
-			shannonEntropy += drawPercentage * Math.log(drawPercentage);
+
+		//Comment this out if games do not have draws or you dont want it included in the entropy calculation
+		if(drawRate > 0.0){
+			shannonEntropy += drawRate * Math.log(drawRate);
 		}
 
 		//Compute final part of shannon entropy
@@ -475,12 +477,12 @@ public class EntropySHUCTAnytime extends AI
 		//Get Shannon Entropy value
 		double shannonEntropy = calculateShannonEntropy(outcomeCounts, visitCount);
 
-		//Get win percentage
-		double winPercentage = (double) outcomeCounts[0]/visitCount;
+		//Get win rate
+		double winRate = (double) outcomeCounts[0]/visitCount;
 		
-		//Combine win percentage and shannon entropy to formulate a rating
-		double rating = winPercentage + (shannonEntropy * entropyWeight);
-		//double rating = Math.max(winPercentage, shannonEntropy);
+		//Combine win rate and shannon entropy to formulate a rating
+		double rating = winRate + (shannonEntropy * entropyWeight);
+		//double rating = Math.max(winRate, shannonEntropy);
 
 		return rating;
 	}

@@ -3,8 +3,6 @@ trap '' HUP
 
 jar_file="AgentEval.jar"
 
-# ------------ AGAINST ANYTIME SH (Amazons Game) ------------
-
 game="Amazons.lud"
 game_name="Amazons"
 agents="entropyshuctanytime shuctanytime"
