@@ -1,0 +1,3 @@
+agents,scores
+"('DoubleIterRegressionTreeSHUCTAny', 'SHUCTAnyTime')","(0.3, -0.3)"
+"('SHUCTAnyTime', 'DoubleIterRegressionTreeSHUCTAny')","(0.3, -0.3)"

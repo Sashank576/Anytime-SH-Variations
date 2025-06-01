@@ -1,0 +1,3 @@
+agents,scores
+"('SHUCTAnyTime', 'RegressionTreeSHUCTAny')","(0.06, -0.06)"
+"('RegressionTreeSHUCTAny', 'SHUCTAnyTime')","(0.06, -0.06)"

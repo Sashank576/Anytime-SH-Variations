@@ -1,0 +1,287 @@
+Warming up...
+Finished warming up!
+=====================================================
+Completed 1 games.
+
+Agent 1 (DoubleIterRegressionTreeSHUCTAny)
+Winning score (between 0 and 1) : N=1, mean=1 (+/-0).
+P1: N=1, mean=1 (+/-0).
+P2: N=0, mean=0 (+/-0).
+Game Durations: N=1, mean=63 (+/-0).
+P1: N=1, mean=63 (+/-0).
+P2: N=0, mean=0 (+/-0).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=1, mean=0 (+/-0).
+P1: N=0, mean=0 (+/-0).
+P2: N=1, mean=0 (+/-0).
+Game Durations: N=1, mean=63 (+/-0).
+P1: N=0, mean=0 (+/-0).
+P2: N=1, mean=63 (+/-0).
+=====================================================
+=====================================================
+Completed 2 games.
+
+Agent 1 (DoubleIterRegressionTreeSHUCTAny)
+Winning score (between 0 and 1) : N=2, mean=0.5 (+/-0.97998).
+P1: N=1, mean=1 (+/-0).
+P2: N=1, mean=0 (+/-0).
+Game Durations: N=2, mean=72 (+/-17.63964).
+P1: N=1, mean=63 (+/-0).
+P2: N=1, mean=81 (+/-0).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=2, mean=0.5 (+/-0.97998).
+P1: N=1, mean=1 (+/-0).
+P2: N=1, mean=0 (+/-0).
+Game Durations: N=2, mean=72 (+/-17.63964).
+P1: N=1, mean=81 (+/-0).
+P2: N=1, mean=63 (+/-0).
+=====================================================
+=====================================================
+Completed 3 games.
+
+Agent 1 (DoubleIterRegressionTreeSHUCTAny)
+Winning score (between 0 and 1) : N=3, mean=0.333333 (+/-0.65332).
+P1: N=2, mean=0.5 (+/-0.97998).
+P2: N=1, mean=0 (+/-0).
+Game Durations: N=3, mean=70 (+/-10.912595).
+P1: N=2, mean=64.5 (+/-2.93994).
+P2: N=1, mean=81 (+/-0).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=3, mean=0.666667 (+/-0.65332).
+P1: N=1, mean=1 (+/-0).
+P2: N=2, mean=0.5 (+/-0.97998).
+Game Durations: N=3, mean=70 (+/-10.912595).
+P1: N=1, mean=81 (+/-0).
+P2: N=2, mean=64.5 (+/-2.93994).
+=====================================================
+=====================================================
+Completed 4 games.
+
+Agent 1 (DoubleIterRegressionTreeSHUCTAny)
+Winning score (between 0 and 1) : N=4, mean=0.25 (+/-0.48999).
+P1: N=2, mean=0.5 (+/-0.97998).
+P2: N=2, mean=0 (+/-0).
+Game Durations: N=4, mean=61.75 (+/-17.91649).
+P1: N=2, mean=64.5 (+/-2.93994).
+P2: N=2, mean=59 (+/-43.11912).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=4, mean=0.75 (+/-0.48999).
+P1: N=2, mean=1 (+/-0).
+P2: N=2, mean=0.5 (+/-0.97998).
+Game Durations: N=4, mean=61.75 (+/-17.91649).
+P1: N=2, mean=59 (+/-43.11912).
+P2: N=2, mean=64.5 (+/-2.93994).
+=====================================================
+=====================================================
+Completed 5 games.
+
+Agent 1 (DoubleIterRegressionTreeSHUCTAny)
+Winning score (between 0 and 1) : N=5, mean=0.2 (+/-0.391992).
+P1: N=3, mean=0.333333 (+/-0.65332).
+P2: N=2, mean=0 (+/-0).
+Game Durations: N=5, mean=55 (+/-19.173579).
+P1: N=3, mean=52.333333 (+/-23.906513).
+P2: N=2, mean=59 (+/-43.11912).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=5, mean=0.8 (+/-0.391992).
+P1: N=2, mean=1 (+/-0).
+P2: N=3, mean=0.666667 (+/-0.65332).
+Game Durations: N=5, mean=55 (+/-19.173579).
+P1: N=2, mean=59 (+/-43.11912).
+P2: N=3, mean=52.333333 (+/-23.906513).
+=====================================================
+=====================================================
+Completed 10 games.
+
+Agent 1 (DoubleIterRegressionTreeSHUCTAny)
+Winning score (between 0 and 1) : N=10, mean=0.3 (+/-0.299389).
+P1: N=5, mean=0.4 (+/-0.48009).
+P2: N=5, mean=0.2 (+/-0.391992).
+Game Durations: N=10, mean=60.6 (+/-10.474331).
+P1: N=5, mean=56.8 (+/-15.573976).
+P2: N=5, mean=64.4 (+/-14.947185).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=10, mean=0.7 (+/-0.299389).
+P1: N=5, mean=0.8 (+/-0.391992).
+P2: N=5, mean=0.6 (+/-0.48009).
+Game Durations: N=10, mean=60.6 (+/-10.474331).
+P1: N=5, mean=64.4 (+/-14.947185).
+P2: N=5, mean=56.8 (+/-15.573976).
+=====================================================
+=====================================================
+Completed 20 games.
+
+Agent 1 (DoubleIterRegressionTreeSHUCTAny)
+Winning score (between 0 and 1) : N=20, mean=0.45 (+/-0.223696).
+P1: N=10, mean=0.6 (+/-0.32006).
+P2: N=10, mean=0.3 (+/-0.299389).
+Game Durations: N=20, mean=59.75 (+/-5.913952).
+P1: N=10, mean=59.2 (+/-8.889955).
+P2: N=10, mean=60.3 (+/-8.269338).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=20, mean=0.55 (+/-0.223696).
+P1: N=10, mean=0.7 (+/-0.299389).
+P2: N=10, mean=0.4 (+/-0.32006).
+Game Durations: N=20, mean=59.75 (+/-5.913952).
+P1: N=10, mean=60.3 (+/-8.269338).
+P2: N=10, mean=59.2 (+/-8.889955).
+=====================================================
+=====================================================
+Completed 30 games.
+
+Agent 1 (DoubleIterRegressionTreeSHUCTAny)
+Winning score (between 0 and 1) : N=30, mean=0.466667 (+/-0.181573).
+P1: N=15, mean=0.666667 (+/-0.246932).
+P2: N=15, mean=0.266667 (+/-0.231643).
+Game Durations: N=30, mean=58.433333 (+/-4.772938).
+P1: N=15, mean=57.2 (+/-6.587665).
+P2: N=15, mean=59.666667 (+/-7.08139).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=30, mean=0.533333 (+/-0.181573).
+P1: N=15, mean=0.733333 (+/-0.231643).
+P2: N=15, mean=0.333333 (+/-0.246932).
+Game Durations: N=30, mean=58.433333 (+/-4.772938).
+P1: N=15, mean=59.666667 (+/-7.08139).
+P2: N=15, mean=57.2 (+/-6.587665).
+=====================================================
+=====================================================
+Completed 40 games.
+
+Agent 1 (DoubleIterRegressionTreeSHUCTAny)
+Winning score (between 0 and 1) : N=40, mean=0.425 (+/-0.155147).
+P1: N=20, mean=0.6 (+/-0.22028).
+P2: N=20, mean=0.25 (+/-0.194702).
+Game Durations: N=40, mean=58.275 (+/-3.890908).
+P1: N=20, mean=57.9 (+/-5.388061).
+P2: N=20, mean=58.65 (+/-5.749973).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=40, mean=0.575 (+/-0.155147).
+P1: N=20, mean=0.75 (+/-0.194702).
+P2: N=20, mean=0.4 (+/-0.22028).
+Game Durations: N=40, mean=58.275 (+/-3.890908).
+P1: N=20, mean=58.65 (+/-5.749973).
+P2: N=20, mean=57.9 (+/-5.388061).
+=====================================================
+=====================================================
+Completed 50 games.
+
+Agent 1 (DoubleIterRegressionTreeSHUCTAny)
+Winning score (between 0 and 1) : N=50, mean=0.4 (+/-0.137169).
+P1: N=25, mean=0.52 (+/-0.199877).
+P2: N=25, mean=0.28 (+/-0.179633).
+Game Durations: N=50, mean=57.06 (+/-3.581918).
+P1: N=25, mean=58.36 (+/-4.912793).
+P2: N=25, mean=55.76 (+/-5.264332).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=50, mean=0.6 (+/-0.137169).
+P1: N=25, mean=0.72 (+/-0.179633).
+P2: N=25, mean=0.48 (+/-0.199877).
+Game Durations: N=50, mean=57.06 (+/-3.581918).
+P1: N=25, mean=55.76 (+/-5.264332).
+P2: N=25, mean=58.36 (+/-4.912793).
+=====================================================
+=====================================================
+Completed 60 games.
+
+Agent 1 (DoubleIterRegressionTreeSHUCTAny)
+Winning score (between 0 and 1) : N=60, mean=0.4 (+/-0.125005).
+P1: N=30, mean=0.533333 (+/-0.181573).
+P2: N=30, mean=0.266667 (+/-0.160947).
+Game Durations: N=60, mean=56.8 (+/-3.230232).
+P1: N=30, mean=57.4 (+/-4.446219).
+P2: N=30, mean=56.2 (+/-4.753208).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=60, mean=0.6 (+/-0.125005).
+P1: N=30, mean=0.733333 (+/-0.160947).
+P2: N=30, mean=0.466667 (+/-0.181573).
+Game Durations: N=60, mean=56.8 (+/-3.230232).
+P1: N=30, mean=56.2 (+/-4.753208).
+P2: N=30, mean=57.4 (+/-4.446219).
+=====================================================
+=====================================================
+Completed 70 games.
+
+Agent 1 (DoubleIterRegressionTreeSHUCTAny)
+Winning score (between 0 and 1) : N=70, mean=0.414286 (+/-0.116229).
+P1: N=35, mean=0.514286 (+/-0.167997).
+P2: N=35, mean=0.314286 (+/-0.156042).
+Game Durations: N=70, mean=57.571429 (+/-2.955272).
+P1: N=35, mean=57.657143 (+/-3.930564).
+P2: N=35, mean=57.485714 (+/-4.471831).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=70, mean=0.585714 (+/-0.116229).
+P1: N=35, mean=0.685714 (+/-0.156042).
+P2: N=35, mean=0.485714 (+/-0.167997).
+Game Durations: N=70, mean=57.571429 (+/-2.955272).
+P1: N=35, mean=57.485714 (+/-4.471831).
+P2: N=35, mean=57.657143 (+/-3.930564).
+=====================================================
+=====================================================
+Completed 80 games.
+
+Agent 1 (DoubleIterRegressionTreeSHUCTAny)
+Winning score (between 0 and 1) : N=80, mean=0.425 (+/-0.109009).
+P1: N=40, mean=0.525 (+/-0.156726).
+P2: N=40, mean=0.325 (+/-0.146997).
+Game Durations: N=80, mean=57.7 (+/-2.731689).
+P1: N=40, mean=58.375 (+/-3.72385).
+P2: N=40, mean=57.025 (+/-4.034149).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=80, mean=0.575 (+/-0.109009).
+P1: N=40, mean=0.675 (+/-0.146997).
+P2: N=40, mean=0.475 (+/-0.156726).
+Game Durations: N=80, mean=57.7 (+/-2.731689).
+P1: N=40, mean=57.025 (+/-4.034149).
+P2: N=40, mean=58.375 (+/-3.72385).
+=====================================================
+=====================================================
+Completed 90 games.
+
+Agent 1 (DoubleIterRegressionTreeSHUCTAny)
+Winning score (between 0 and 1) : N=90, mean=0.422222 (+/-0.102613).
+P1: N=45, mean=0.511111 (+/-0.147701).
+P2: N=45, mean=0.333333 (+/-0.139288).
+Game Durations: N=90, mean=57.055556 (+/-2.533207).
+P1: N=45, mean=58.111111 (+/-3.340145).
+P2: N=45, mean=56 (+/-3.822188).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=90, mean=0.577778 (+/-0.102613).
+P1: N=45, mean=0.666667 (+/-0.139288).
+P2: N=45, mean=0.488889 (+/-0.147701).
+Game Durations: N=90, mean=57.055556 (+/-2.533207).
+P1: N=45, mean=56 (+/-3.822188).
+P2: N=45, mean=58.111111 (+/-3.340145).
+=====================================================
+=====================================================
+Completed 100 games.
+
+Agent 1 (DoubleIterRegressionTreeSHUCTAny)
+Winning score (between 0 and 1) : N=100, mean=0.44 (+/-0.09778).
+P1: N=50, mean=0.52 (+/-0.139885).
+P2: N=50, mean=0.36 (+/-0.134397).
+Game Durations: N=100, mean=57.36 (+/-2.436951).
+P1: N=50, mean=58.48 (+/-3.267782).
+P2: N=50, mean=56.24 (+/-3.622464).
+
+Agent 2 (SHUCTAnyTime)
+Winning score (between 0 and 1) : N=100, mean=0.56 (+/-0.09778).
+P1: N=50, mean=0.64 (+/-0.134397).
+P2: N=50, mean=0.48 (+/-0.139885).
+Game Durations: N=100, mean=57.36 (+/-2.436951).
+P1: N=50, mean=56.24 (+/-3.622464).
+P2: N=50, mean=58.48 (+/-3.267782).
+=====================================================
