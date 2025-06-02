@@ -48,7 +48,7 @@ public class StandardClustering extends AI
 	 */
 	public StandardClustering(boolean iterMode, int iterBudget, double explorationConstant)
 	{
-		this.friendlyName = "RegressionTreeSHUCTAny";
+		this.friendlyName = "StandardClustering";
 		this.iterMode = iterMode;
 
 		if(explorationConstant == -1.0){

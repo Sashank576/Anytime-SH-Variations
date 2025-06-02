@@ -48,7 +48,7 @@ public class DoubleIterationClustering extends AI
 	 */
 	public DoubleIterationClustering(boolean iterMode, int iterBudget, double explorationConstant)
 	{
-		this.friendlyName = "DoubleIterRegressionTreeSHUCTAny";
+		this.friendlyName = "DoubleIterationClustering";
 		this.iterMode = iterMode;
 
 		if(explorationConstant == -1.0){
