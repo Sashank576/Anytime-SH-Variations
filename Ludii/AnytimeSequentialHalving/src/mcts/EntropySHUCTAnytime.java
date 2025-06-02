@@ -14,10 +14,13 @@ import other.context.Context;
 import other.move.Move;
 
 /**
- * An "AnyTime" Sequential Halving Agent, utilizing UCB1 below the root node.
+ * An "AnyTime" Sequential Halving Agent Variation, utilizing UCB1 below the root node.
  * 
  * Only supports deterministic, alternating-move games.
  * 
+ * This Shannon Entropy agent modifies the pruning strategy by using the Shannon Entropy value of each child node.
+ * The entropy value is combined with the node's win rate to then compute a rating for each child node.
+ * This replace the standard exploit value to rank nodes.
  * 
  * This class is a modified version of the Anytime Sequential Halving agent provided by Dominic Sagers.
  * @author Sashank Chapala

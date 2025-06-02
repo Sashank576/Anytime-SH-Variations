@@ -14,15 +14,18 @@ import other.context.Context;
 import other.move.Move;
 
 /**
- * An "AnyTime" Sequential Halving Agent, utilizing UCB1 below the root node.
+ * An "AnyTime" Sequential Halving Agent Variation, utilizing UCB1 below the root node.
  * 
  * Only supports deterministic, alternating-move games.
  * 
+ * This Standard Clustering Agent modifies the pruning strategy by testing every possible split of the children nodes
+ * For every split, it calculates the Sum of Squared Errors (SSE) and selects the split that minimizes the SSE.
+ * Since a dynamic number of nodes can be pruned, the iterations are split evenly across the remaining nodes in the round.
  * 
  * This class is a modified version of the Anytime Sequential Halving agent provided by Dominic Sagers.
  * @author Sashank Chapala
  */
-public class DoubleIterRegressionTreeSHUCTAny extends AI
+public class StandardClustering extends AI
 {
 	
 	//-------------------------------------------------------------------------
@@ -43,9 +46,9 @@ public class DoubleIterRegressionTreeSHUCTAny extends AI
 	/**
 	 * Constructor
 	 */
-	public DoubleIterRegressionTreeSHUCTAny(boolean iterMode, int iterBudget, double explorationConstant)
+	public StandardClustering(boolean iterMode, int iterBudget, double explorationConstant)
 	{
-		this.friendlyName = "DoubleIterRegressionTreeSHUCTAny";
+		this.friendlyName = "RegressionTreeSHUCTAny";
 		this.iterMode = iterMode;
 
 		if(explorationConstant == -1.0){
@@ -169,9 +172,6 @@ public class DoubleIterRegressionTreeSHUCTAny extends AI
 		int rootNodesVisited = 0;
 		
 		int idx = 0;//keeps track of where we are in the index list
-
-		//Tracks how many iterations per node gets during each round
-		int iterationsPerNode = 1;
 
 		// System.out.println("iterationBudget: " + this.iterationBudget + " \n numIterations: " + this.numIterations);
 		// System.out.println("Iter per round: " + this.iterPerRound);
@@ -318,8 +318,8 @@ public class DoubleIterRegressionTreeSHUCTAny extends AI
 
 			}
 
-			if (armVisitCount >= iterationsPerNode * currentChildrenIdx.size())
-			{ //if we have visited the all children before halving and # of visits per node is equal to iterationsPerNode
+			if (armVisitCount == numPossibleMoves)
+			{ //if we have visited the all children before halving
 				armVisitCount = 0;
 				if (currentChildrenIdx.size() <= 2)
 				{ //if we have visited all children AND we have halved the amount of times required
@@ -331,8 +331,6 @@ public class DoubleIterRegressionTreeSHUCTAny extends AI
 					}
 
 					idx = 0;
-					//Reset iterationsPerNode to 1 since we are going to a new pass
-					iterationsPerNode = 1;
 				}
 				else
 				{ //We haven't finished halving, so we halve based on the current exploit values
@@ -342,8 +340,6 @@ public class DoubleIterRegressionTreeSHUCTAny extends AI
 					//System.out.println("After: " + currentChildrenIdx.toString());
 					
 					idx = 0;
-					//Double iterationsPerNode since we are going into the next round
-					iterationsPerNode = iterationsPerNode * 2;
 				}
 			}
 
@@ -454,7 +450,7 @@ public class DoubleIterRegressionTreeSHUCTAny extends AI
 		 * @param hist
 		 * @param algo
 		 */
-	public static void displayHist(ArrayList<Integer> hist, DoubleIterRegressionTreeSHUCTAny algo){
+	public static void displayHist(ArrayList<Integer> hist, StandardClustering algo){
 		 
 		// Count occurrences of each integer
 		HashMap<Integer, Integer> counts = new HashMap<>();

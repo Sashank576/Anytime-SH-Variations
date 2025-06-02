@@ -8,11 +8,11 @@ import features.feature_sets.network.JITSPatterNetFeatureSet;
 import main.CommandLineArgParse.ArgOption;
 import main.CommandLineArgParse.OptionTypes;
 import mcts.ExampleUCT;
-import mcts.RegressionTreeSHUCTAny;
+import mcts.StandardClustering;
 import mcts.SHUCT;
 import mcts.SHUCTAnyTime;
 import mcts.SHUCTTime;
-import mcts.DoubleIterRegressionTreeSHUCTAny;
+import mcts.DoubleIterationClustering;
 import mcts.EntropySHUCTAnytime;
 import other.AI;
 import supplementary.experiments.EvalGamesSet;
@@ -335,13 +335,13 @@ public class AgentExperimentRunner {
 				EntropySHUCTAnytime entropyshanytime = new EntropySHUCTAnytime(this.anytimeMode, this.anytimeBudget, this.entropyWeight, this.explorationConstant);
                 ais.add(entropyshanytime);
 			}
-			else if(agent.equalsIgnoreCase("regressiontreeshuctany")){
-				RegressionTreeSHUCTAny regressionTreeSHUCTAny = new RegressionTreeSHUCTAny(this.anytimeMode, this.anytimeBudget, this.explorationConstant);
-                ais.add(regressionTreeSHUCTAny);
+			else if(agent.equalsIgnoreCase("standardClustering")){
+				StandardClustering standardClustering = new StandardClustering(this.anytimeMode, this.anytimeBudget, this.explorationConstant);
+                ais.add(standardClustering);
 			}
-			else if(agent.equalsIgnoreCase("doubleiterregressiontreeshuctany")){
-				DoubleIterRegressionTreeSHUCTAny doubleIterRegressionTreeSHUCTAny = new DoubleIterRegressionTreeSHUCTAny(this.anytimeMode, this.anytimeBudget, this.explorationConstant);
-                ais.add(doubleIterRegressionTreeSHUCTAny);
+			else if(agent.equalsIgnoreCase("doubleIterationClustering")){
+				DoubleIterationClustering doubleIterationClustering = new DoubleIterationClustering(this.anytimeMode, this.anytimeBudget, this.explorationConstant);
+                ais.add(doubleIterationClustering);
 			}
 			else {
                 ais.add(AIFactory.createAI(agent));

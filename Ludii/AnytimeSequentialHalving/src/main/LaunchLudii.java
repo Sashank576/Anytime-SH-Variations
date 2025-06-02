@@ -3,8 +3,8 @@ package main;
 import app.StartDesktopApp;
 import mcts.EntropySHUCTAnytime;
 import mcts.ExampleUCT;
-import mcts.RegressionTreeSHUCTAny;
-import mcts.DoubleIterRegressionTreeSHUCTAny;
+import mcts.StandardClustering;
+import mcts.DoubleIterationClustering;
 import mcts.SHUCT;
 import mcts.SHUCTAnyTime;
 import mcts.SHUCTTime;
@@ -41,10 +41,10 @@ public class LaunchLudii
 		if (!AIRegistry.registerAI("EntropySHUCTAnytime", () -> {return new EntropySHUCTAnytime(true, -1, 0.5, -1);}, (game) -> {return new EntropySHUCTAnytime(true, -1, 0.3875, -1).supportsGame(game);}))
 			System.err.println("WARNING! Failed to register AI because one with that name already existed!");
 
-		if (!AIRegistry.registerAI("RegressionTreeSHUCTAny", () -> {return new RegressionTreeSHUCTAny(true, -1, -1);}, (game) -> {return new RegressionTreeSHUCTAny(true, -1, -1).supportsGame(game);}))
+		if (!AIRegistry.registerAI("StandardClustering", () -> {return new StandardClustering(true, -1, -1);}, (game) -> {return new StandardClustering(true, -1, -1).supportsGame(game);}))
 			System.err.println("WARNING! Failed to register AI because one with that name already existed!");
 
-		if (!AIRegistry.registerAI("DoubleIterRegressionTreeSHUCTAny", () -> {return new DoubleIterRegressionTreeSHUCTAny(true, -1, -1);}, (game) -> {return new DoubleIterRegressionTreeSHUCTAny(true, -1, -1).supportsGame(game);}))
+		if (!AIRegistry.registerAI("DoubleIterationClustering", () -> {return new DoubleIterationClustering(true, -1, -1);}, (game) -> {return new DoubleIterationClustering(true, -1, -1).supportsGame(game);}))
 			System.err.println("WARNING! Failed to register AI because one with that name already existed!");
 
 		// Run Ludii
